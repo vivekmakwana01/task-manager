@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useTaskStore } from "@/store/taskStore";
+import { XMarkIcon } from "@heroicons/react/16/solid";
 
 export default function Home() {
     const { tasks, addTask, toggleTask, removeTask } = useTaskStore();
@@ -18,6 +19,14 @@ export default function Home() {
                     value={taskTitle}
                     onChange={(e) => setTaskTitle(e.target.value)}
                     className="border p-2 flex-1 rounded-md text-gray-800 bg-white focus:ring-2 focus:ring-blue-500"
+                    onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                            if (taskTitle) {
+                                addTask(taskTitle);
+                                setTaskTitle("");
+                            }
+                        }
+                    }}
                 />
                 <button
                     onClick={() => {
@@ -34,14 +43,16 @@ export default function Home() {
 
             <ul className="mt-4">
                 {tasks.map((task) => (
-                    <li key={task.id} className="flex justify-between items-center p-2 border-b">
+                    <li key={task.id} className="flex justify-between items-center bg-white rounded-lg px-4 py-2 mb-2">
                         <span
                             onClick={() => toggleTask(task.id)}
-                            className={`cursor-pointer ${task.completed ? "line-through text-gray-500" : ""}`}
+                            className={`cursor-pointer text-black ${task.completed ? "line-through" : ""}`}
                         >
                             {task.title}
                         </span>
-                        <button onClick={() => removeTask(task.id)} className="text-red-500">X</button>
+                        <button onClick={() => removeTask(task.id)} className="text-red-500 bg-white p-1 rounded-full hover:bg-gray-300">
+                            <XMarkIcon className="h-6 w-6" />
+                        </button>
                     </li>
                 ))}
             </ul>
