@@ -1,27 +1,25 @@
 import { create } from "zustand";
 
-type Task = {
+export type Task = {
   id: string;
   title: string;
+  description?: string;
   completed: boolean;
   date: Date;
 };
 
 type TaskStore = {
   tasks: Task[];
-  addTask: (title: string, date: Date) => void;
+  addTask: (task: Task) => void;
   toggleTask: (id: string) => void;
   removeTask: (id: string) => void;
 };
 
 export const useTaskStore = create<TaskStore>((set) => ({
   tasks: [],
-  addTask: (title, date) =>
+  addTask: (task) =>
     set((state) => ({
-      tasks: [
-        ...state.tasks,
-        { id: crypto.randomUUID(), title, completed: false, date },
-      ],
+      tasks: [...state.tasks, task],
     })),
   toggleTask: (id) =>
     set((state) => ({
