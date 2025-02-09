@@ -39,17 +39,19 @@ export default function TaskForm() {
         placeholder="New task..."
         value={taskTitle}
         onChange={(e) => setTaskTitle(e.target.value)}
+        className="bg-white"
       />
 
       <Textarea
         placeholder="Task description..."
         value={taskDescription}
         onChange={(e) => setTaskDescription(e.target.value)}
+        className="bg-white"
       />
 
       <Popover>
         <PopoverTrigger asChild>
-          <Button variant="outline" className="justify-start text-left">
+          <Button variant="outline" className="justify-start text-left bg-white">
             {taskDate ? format(taskDate, "PPP") : "Pick a date"}
           </Button>
         </PopoverTrigger>
