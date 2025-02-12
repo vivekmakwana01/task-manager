@@ -18,6 +18,7 @@ import {
     PopoverTrigger,
 } from "@/components/ui/popover";
 import { Calendar } from "@/components/ui/calendar";
+import { Plus } from "lucide-react";
 
 export default function AddTaskModal({
     open,
@@ -81,7 +82,10 @@ export default function AddTaskModal({
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
-                <Button className="w-full">Add Task</Button>
+                <Button variant="ghost" className="bg-[#E1EBF9] text-[#5E8BD6]">
+                    <Plus className="w-5 h-5" />
+                    New Task
+                </Button>
             </DialogTrigger>
             <DialogContent
                 className="p-6 bg-white rounded-lg shadow-lg border border-gray-300 w-10/12 md:w-full"

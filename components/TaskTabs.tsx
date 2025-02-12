@@ -8,7 +8,7 @@ export default function TaskTabs() {
     const [filter, setFilter] = useState<"all" | "open" | "closed">("all");
     return (
         <Tabs defaultValue="all" onChange={(val) => setFilter(val as any)}>
-            <TabsList className="flex gap-3 rounded-lg mt-4 bg-white">
+            <TabsList className="flex gap-3 rounded-lg mt-4 bg-[--bg-color]">
                 <TabsTrigger
                     value="all"
                     className="flex items-center gap-2 font-medium data-[state=active]:text-blue-600"

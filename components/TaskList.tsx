@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { useSelectedTask, useTaskStore } from "@/store/useTaskStore";
 import { Card, CardContent } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { Task } from "@/store/useTaskStore";
 import { useState } from "react";
 
@@ -12,11 +13,11 @@ export default function TaskList({ tasks }: { tasks: Task[] }) {
     const setSelectedTask = useSelectedTask((state) => state.setSelectedTask);
 
     return (
-        <div className="mt-4 flex flex-col gap-3">
+        <ScrollArea className="mt-4 flex flex-col gap-3 max-h-[calc(100vh-320px)]">
             {tasks.map((task) => (
                 <Card
                     key={task.id}
-                    className="p-3 border-slate-100 rounded-lg shadow-sm"
+                    className="p-3 border-slate-100 rounded-xl shadow-soft"
                     onClick={() => setSelectedTask(task)}
                 >
                     <div className="flex justify-between items-center">
@@ -72,6 +73,6 @@ export default function TaskList({ tasks }: { tasks: Task[] }) {
                     </div>
                 </Card>
             ))}
-        </div>
+        </ScrollArea>
     );
 }
