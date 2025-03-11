@@ -1,3 +1,4 @@
+import { Tag } from "emblor";
 import { create } from "zustand";
 
 export type Task = {
@@ -6,6 +7,7 @@ export type Task = {
   description?: string;
   completed: boolean;
   date: Date;
+  tags: Tag[];
 };
 
 type TaskStore = {

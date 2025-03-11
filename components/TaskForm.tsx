@@ -1,5 +1,5 @@
 import { Task, useTaskStore } from "@/store/useTaskStore";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { format } from "date-fns";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -10,6 +10,8 @@ import {
 } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
+import { ReactTags } from "react-tag-autocomplete";
+import { Tag, TagInput } from "emblor";
 
 export default function TaskForm({
   isEditing,
@@ -26,6 +28,8 @@ export default function TaskForm({
   const [taskTitle, setTaskTitle] = useState("");
   const [taskDescription, setTaskDescription] = useState("");
   const [taskDate, setTaskDate] = useState<Date | undefined>(new Date());
+  const [tags, setTags] = useState<Tag[]>([]);
+  const [activeTagIndex, setActiveTagIndex] = useState<number | null>(null);
 
   const handleAddTask = () => {
     if (taskTitle && taskDate) {
@@ -42,6 +46,7 @@ export default function TaskForm({
           description: taskDescription,
           date: new Date(taskDate),
           completed: false,
+          tags: tags,
         });
       }
       setTaskTitle("");
@@ -85,6 +90,23 @@ export default function TaskForm({
           <Calendar mode="single" selected={taskDate} onSelect={setTaskDate} />
         </PopoverContent>
       </Popover>
+
+      <TagInput
+        placeholder="Enter tags"
+        styleClasses={{
+          inlineTagsContainer: "max-w-full flex flex-wrap",
+          tag: {
+            body: "px-2",
+          },
+        }}
+        tags={tags}
+        setTags={(newTags) => {
+          setTags(newTags);
+        }}
+        activeTagIndex={activeTagIndex}
+        setActiveTagIndex={setActiveTagIndex}
+        shape={"rounded"}
+      />
 
       <Button onClick={handleAddTask}>
         {isEditing ? "Update Task" : "Add Task"}
