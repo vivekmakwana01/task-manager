@@ -4,17 +4,34 @@ import { useTaskStore } from "@/store/useTaskStore";
 import { Card, CardContent } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Task } from "@/store/useTaskStore";
+import TaskForm from "./TaskForm";
+import { useState } from "react";
 
 export default function TaskCard({ tasks }: { tasks: Task[] }) {
   const removeTask = useTaskStore((state) => state.removeTask);
-  const toggleTask = useTaskStore((state) => state.toggleTask); // ✅ Keep toggleTask
+  const toggleTask = useTaskStore((state) => state.toggleTask);
+  const [isEditing, setIsEditing] = useState(false);
+  const [editingTask, setEditingTask] = useState<Task | undefined>(undefined);
+
+  const editTaskHandler = (task: Task) => {
+    setIsEditing(true);
+    setEditingTask(task);
+  };
 
   return (
     <div className="mt-4 flex flex-col gap-3">
+      <TaskForm
+        isEditing={isEditing}
+        editingTask={editingTask}
+        setIsEditing={setIsEditing}
+        setEditingTask={setEditingTask}
+      />
+
       {tasks.map((task) => (
         <Card
           key={task.id}
           className="p-3 border-slate-100 rounded-lg shadow-sm"
+          onClick={() => editTaskHandler(task)}
         >
           <div className="flex justify-between items-center">
             <div className="flex flex-col">
