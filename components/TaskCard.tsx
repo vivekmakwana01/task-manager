@@ -31,7 +31,7 @@ export default function TaskCard({ tasks }: { tasks: Task[] }) {
       {tasks.map((task) => (
         <Card
           key={task.id}
-          className="p-3 border-slate-100 dark:border-slate-900 rounded-lg shadow-sm"
+          className="p-3 border-slate-100 rounded-lg shadow-sm"
           onClick={() => editTaskHandler(task)}
         >
           <div className="flex justify-between items-center">
@@ -64,13 +64,13 @@ export default function TaskCard({ tasks }: { tasks: Task[] }) {
             />
           </div>
 
-          <div className="border-t border-gray-100 dark:border-gray-900 my-2"></div>
+          <div className="border-t border-gray-100 my-2"></div>
 
           {task.tags && task.tags.length > 0 && (
             <div className="flex justify-between items-center mb-2">
               <div className="flex gap-2">
                 {task.tags.map((tag) => (
-                  <div className="flex items-center px-2 py-1 bg-gray-100 dark:bg-gray-900 text-xs text-gray-900 dark:text-gray-100 rounded-full">
+                  <div key={tag.id} className="flex items-center px-2 py-1 bg-gray-100 text-xs text-gray-900 rounded-full">
                     <span key={tag.id}>{tag.text}</span>
                     <Button
                       className="w-6 h-6 p-2 rounded-full ml-2"

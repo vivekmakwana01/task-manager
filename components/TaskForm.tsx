@@ -52,6 +52,7 @@ export default function TaskForm({
       setTaskTitle("");
       setTaskDescription("");
       setTaskDate(new Date());
+      setTags([]);
       setIsEditing(false);
       setEditingTask(undefined);
     }
